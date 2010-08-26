@@ -1,0 +1,9 @@
+project_type = :stand_alone
+http_path = "/"
+#css_dir="../_build/html/_static"
+css_dir = "../_static"
+sass_dir = "."
+images_dir = "../_static"
+javascripts_dir = "../_static"
+output_style = :expanded
+relative_assets = true
