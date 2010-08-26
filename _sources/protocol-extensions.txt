@@ -1,7 +1,0 @@
-===================
-Protocol extensions
-===================
-
-
-Multiple callbacks
-==================
