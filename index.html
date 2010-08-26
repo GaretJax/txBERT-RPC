@@ -76,6 +76,47 @@
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://github.com/GaretJax/txBERT">txBERT</a> is a python library offering both
+client and server implementations to easily deploy and access remote services
+using the <a class="reference external" href="http://bert-rpc.org">BERT-RPC</a> protocol and the <a class="reference external" href="http://twistedmatrix.com">Twisted
+networking engine</a>.</p>
+<p>The provided libraries can be exploited both using low-level API method calls
+or by taking advantage of the many shortcuts and utilities provided by the
+high-level API.</p>
+<p>The most simple way to deploy a remotely-accessible BERT service is by using
+the shortcuts provided by the <tt class="docutils literal"><span class="pre">txbert</span></tt> module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">txbert</span>
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span>
+
+<span class="k">class</span> <span class="nc">Calculator</span><span class="p">(</span><span class="n">txbert</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+    <span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+
+<span class="n">txbert</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span><span class="mi">9999</span><span class="p">,</span> <span class="n">Calculator</span><span class="p">())</span>
+<span class="n">reactor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Similarly, it is possible to create a client with very little effort:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">defer</span><span class="p">,</span> <span class="n">reactor</span>
+<span class="kn">import</span> <span class="nn">txbert</span>
+
+<span class="nd">@defer.inlineCallbacks</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">service</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">txbert</span><span class="o">.</span><span class="n">service</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">service</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">result</span>
+
+<span class="n">reactor</span><span class="o">.</span><span class="n">callWhenRunning</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="n">reactor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>But probably you want to use the high-level APIs instead of the shortcuts to
+be able to customize and exploit all features provided by the library.
+Refer to the complete documentation for the HOW-TOs and the detailed
+instructions about how to use them.</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
