@@ -1,6 +1,0 @@
-
-
-
-
-.. automodule:: txbert.protocol
-   :members:
