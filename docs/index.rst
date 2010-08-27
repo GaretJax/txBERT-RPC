@@ -48,8 +48,8 @@ specification.
 Other formats
 -------------
 
-Documentation documents in other formats than the current one (HTML, PDF,
-docbook and any other format supported by sphinx) can be generated from the
-sources located in the ´´docs´´ subdirectory of the repository.
+Documentation in formats different than the current one (HTML, PDF, docbook or
+any other format supported by sphinx) can be generated directly from the
+sources located in the ``docs`` subdirectory of the repository.
 
 
