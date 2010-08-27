@@ -100,9 +100,8 @@ class Module(object):
         return self.name
     
     def __repr__(self):
-        return "MODULE"
-        #peer = self.transport.getPeer()
-        #return '<%s instance on %s:%s>' % (self.name, peer.host, peer.port)
+        peer = self.client.transport.getPeer()
+        return '<%s instance on %s:%s>' % (self.name, peer.host, peer.port)
     
     def __getattr__(self, name):
         try:

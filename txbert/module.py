@@ -77,7 +77,7 @@ def WhitelistModuleMixin(*methods):
         def getFunction(self, name):
             """
             Returns the instance method with the given C{name} only if the name
-            does not begin with an underscore.
+            was whitelisted.
             """
             if name not in whitelist:
                 raise AttributeError("Only whitelisted methods can be called" \
