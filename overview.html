@@ -55,7 +55,10 @@
                 <ul>
 <li><a class="reference internal" href="#">Overview</a><ul>
 <li><a class="reference internal" href="#preamble">Preamble</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#shortcuts">Shortcuts</a><ul>
+<li><a class="reference internal" href="#a-simple-server">A simple server</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -81,8 +84,36 @@
 <tt class="docutils literal"><span class="pre">txbert</span></tt> package and its dependencies. You should also be comfortable with
 Twisted&#8217;s philosophy, concepts and coding guidelines.</p>
 </div>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="shortcuts">
+<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">txbert</span></tt> package offers a small set of shortcuts used to rapidly deploy
+or access services over BERT-RPC.</p>
+<p>These functions make some assumptions about the exposed/accessed services and
+do not offer an high degree of flexibility. Nevertheless they offer a valid
+alternative to a more verbose solution and are a valid alternative for basic
+deployments.</p>
+<p>All of the shortcuts are contained in the <tt class="docutils literal"><span class="pre">txbert.shortcuts</span></tt> module, but can
+be accessed from the <tt class="docutils literal"><span class="pre">txbert</span></tt> module for the sake of brevity.</p>
+<div class="section" id="a-simple-server">
+<h3>A simple server<a class="headerlink" href="#a-simple-server" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">serve</span></tt> shortcut can be used to expose all methods of an arbitrary
+object over BERT-RPC.</p>
+<p>Basic (but complete) example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">txbert</span>
+<span class="kn">from</span> <span class="nn">twisted.internet</span> <span class="kn">import</span> <span class="n">reactor</span>
+
+<span class="k">class</span> <span class="nc">Calculator</span><span class="p">(</span><span class="n">txbert</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+   <span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+
+<span class="n">txbert</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span><span class="mi">9999</span><span class="p">,</span> <span class="n">Calculator</span><span class="p">())</span>
+<span class="n">reactor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
