@@ -45,3 +45,11 @@ specification.
     development
 
 
+Other formats
+-------------
+
+Documentation documents in other formats than the current one (HTML, PDF,
+docbook and any other format supported by sphinx) can be generated from the
+sources located in the ´´docs´´ subdirectory of the repository.
+
+
